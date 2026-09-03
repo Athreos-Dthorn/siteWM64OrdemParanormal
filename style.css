@@ -434,7 +434,6 @@ body {
         font-size: 0.95rem;
         line-height: 1.7;
     }
-
     .texto-checkbox {
         font-size: 0.9rem;
     }
@@ -642,3 +641,12 @@ body {
         opacity: 0;
     }
 }
+    introducao p,
+    .termo p,
+    .termo li,
+    .campo label,
+    .campo input[type="text"],
+    .campo input[type="number"],
+    .opcoes-experiencia label span {
+        font-size: clamp(16px, 2.2vw, 24px);
+    }
