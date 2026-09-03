@@ -158,18 +158,20 @@ botaoQuestionario1.addEventListener("click", function () {
             respostas.experiencia = opcao.value;
         }
     });
-    questionario1.classList.remove("visivel");
+   questionario1.classList.remove("visivel");
+
+setTimeout(function () {
+    questionario1.style.display = "none";
+    questionario2.style.display = "block";
+
+    voltarAoTopo();
 
     setTimeout(function () {
-        questionario1.style.display = "none";
-        questionario2.style.display = "block";
-        window.scrollTo(0, 0);
+        questionario2.classList.add("visivel");
+        voltarAoTopo();
+    }, 50);
 
-        setTimeout(function () {
-            questionario2.classList.add("visivel");
-        }, 50);
-
-    }, 600);
+}, 600);
 });
 
 botaoQuestionario2.addEventListener("click", function () {
@@ -195,14 +197,17 @@ botaoQuestionario2.addEventListener("click", function () {
     questionario2.classList.remove("visivel");
 
     setTimeout(function () {
-        questionario2.style.display = "none";
-        questionario3.style.display = "block";
-        window.scrollTo(0, 0);
-        setTimeout(function () {
-            questionario3.classList.add("visivel");
-        }, 50);
+    questionario2.style.display = "none";
+    questionario3.style.display = "block";
 
-    }, 600);
+    voltarAoTopo();
+
+    setTimeout(function () {
+        questionario3.classList.add("visivel");
+        voltarAoTopo();
+    }, 50);
+
+}, 600);
 });
 
 botaoQuestionario3.addEventListener("click", function () {
@@ -233,24 +238,28 @@ botaoQuestionario3.addEventListener("click", function () {
     questionario3.classList.remove("visivel");
 
     setTimeout(function () {
-        questionario3.style.display = "none";
+    questionario3.style.display = "none";
 
-        tituloQuestionario.classList.remove("visivel");
-        simboloTopo.style.display = "none";
-        window.scrollTo(0, 0);
-        musica.pause();
-        musica.currentTime = 0;
+    tituloQuestionario.classList.remove("visivel");
+    simboloTopo.style.display = "none";
 
-        musicaFinal.play().catch(function (erro) {
-            console.log("Não foi possível iniciar a música final:", erro);
-        });
+    musica.pause();
+    musica.currentTime = 0;
 
-        telaFinal.style.display = "block";
+    musicaFinal.play().catch(function (erro) {
+        console.log("Não foi possível iniciar a música final:", erro);
+    });
 
-        setTimeout(function () {
-            telaFinal.classList.add("visivel");
-        }, 50);
-    }, 600);
+    telaFinal.style.display = "block";
+
+    voltarAoTopo();
+
+    setTimeout(function () {
+        telaFinal.classList.add("visivel");
+        voltarAoTopo();
+    }, 50);
+
+}, 600);
 });
 
 botaoNao.addEventListener("click", function () {
