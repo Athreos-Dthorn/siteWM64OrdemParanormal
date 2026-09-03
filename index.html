@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ordem Paranormal — Recrutamento</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <audio id="musica" loop>
+        <source src="audio/musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="musicaFinal" loop>
+        <source src="audio/musicaFinal.mp3" type="audio/mpeg">
+    </audio>
+    <!-- =====================================
+         TELA INICIAL
+    ====================================== -->
+
+    <section id="telaInicial" class="tela-inicial">
+
+        <button id="simboloEntrada" class="simbolo-entrada">
+
+            <img src="img/simbolo.png" alt="Entrar">
+
+        </button>
+ 
+    </section>
+
+
+    <!-- =====================================
+         CONTEÚDO PRINCIPAL
+    ====================================== -->
+
+    <main id="conteudo" class="pagina">
+
+        <!-- SÍMBOLO NO TOPO -->
+
+        <section class="simbolo-topo">
+
+            <img src="img/simbolo.png" alt="Símbolo da Ordem">
+
+        </section>
+
+
+        <!-- INTRODUÇÃO -->
+
+        <section class="introducao">
+
+            <h1>Saudações, Agente.</h1>
+
+            <p>
+                Sua próxima missão está sendo preparada. Antes de prosseguir,
+                precisamos coletar algumas informações suas e garantir sua
+                conformidade com os protocolos da operação.
+            </p>
+
+            <p>
+                Responda com atenção: cada detalhe pode impactar o sucesso da
+                missão e a segurança de toda a equipe. Lembre-se, o mundo
+                paranormal é imprevisível, mas sua colaboração é fundamental
+                para que a Ordem continue em operação.
+            </p>
+
+        </section>
+
+
+        <!-- TERMO -->
+
+        <section class="termo">
+
+            <h2>Termo de Autorização de Dados</h2>
+
+            <p>
+                Ao preencher este formulário, declaro que estou ciente e
+                autorizo a coleta e uso das seguintes informações pessoais:
+                <strong>nome completo, possíveis gatilhos mentais, idade e Instagram.</strong>
+            </p>
+
+            <p>
+                Estas informações serão utilizadas exclusivamente para fins
+                relacionados à organização e condução da campanha de RPG
+                <strong>Ordem Paranormal</strong>, incluindo:
+            </p>
+
+            <ul>
+                <li>Contato para explicação de regras;</li>
+                <li>Criação de ficha e atividades da campanha;</li>
+                <li>Comunicação entre a equipe de organização e os jogadores.</li>
+            </ul>
+
+            <p>
+                Declaro ainda que os dados fornecidos serão tratados com
+                confidencialidade, não sendo compartilhados com terceiros fora
+                do contexto da campanha, e que posso solicitar a exclusão ou
+                atualização dessas informações a qualquer momento, entrando
+                em contato com a organização que participará deste mesmo grupo.
+            </p>
+
+
+            <!-- CONSENTIMENTO -->
+
+            <div class="consentimento">
+
+                <label class="checkbox-container">
+
+                    <input type="checkbox" id="consentimento">
+
+                    <span class="checkmark"></span>
+
+                    <span class="texto-checkbox">
+                        Ao marcar a opção de consentimento, confirmo que li,
+                        compreendi e concordo com os termos acima.
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- BOTÃO -->
+
+            <div class="proximo-container">
+
+                <button
+                    id="botaoProsseguir"
+                    class="botao"
+                    disabled
+                >
+                    PROSSEGUIR
+                </button>
+
+            </div>
+
+        </section>
+                </section>
+
+
+        <!-- =====================================
+             QUESTIONÁRIO — TELA 1
+        ====================================== -->
+        <div class="titulo-questionario">
+            <h2>Todos Merecem um Novo Começo</h2>
+        </div>
+        <section id="questionario1" class="questionario">
+
+
+            <!-- IDENTIFICAÇÃO -->
+
+            <div class="campo">
+
+                <label for="nomeCompleto">
+                    Nome Completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nomeCompleto"
+                    name="nomeCompleto"
+                    placeholder="Digite seu nome completo"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="idade">
+                    Idade
+                </label>
+
+                <input
+                    type="number"
+                    id="idade"
+                    name="idade"
+                    placeholder="Digite sua idade"
+                    min="1"
+                >
+
+            </div>
+
+
+            <!-- EXPERIÊNCIA COM ORDEM PARANORMAL -->
+
+            <div class="campo experiencia">
+
+                <label>
+                    Qual seu nível de experiência com Ordem Paranormal?
+                </label>
+
+                <div class="opcoes-experiencia">
+
+                    <!-- Cada opção será selecionável pelo jogador -->
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="experiencia"
+                            value="O que é Ordem Paranormal?"
+                        >
+                        <span>O que é Ordem Paranormal?</span>
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="experiencia"
+                            value="Iniciante"
+                        >
+                        <span>Iniciante</span>
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="experiencia"
+                            value="Operador"
+                        >
+                        <span>Operador</span>
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="experiencia"
+                            value="Veterano"
+                        >
+                        <span>Veterano</span>
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="experiencia"
+                            value="Equipe E"
+                        >
+                        <span>Equipe E</span>
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTÃO PARA A PRÓXIMA TELA -->
+
+            <div class="proximo-container">
+
+                <button
+                    id="botaoQuestionario1"
+                    class="botao"
+                >
+                    CONTINUAR
+                </button>
+
+            </div>
+
+        </section>
+        <!-- =====================================
+             QUESTIONÁRIO — TELA 2
+        ====================================== -->
+        <section id="questionario02" class="questionario">
+
+            <!-- Missão durante todo o evento -->
+
+            <div class = "campo">
+                <label for="duracao">
+                    Você deseja participar de uma missão com duração durante todo o evento (8h às 12h), sabendo que não poderá participar de demais atividades e deverá chegar no horário e não poderá sair antecipadamente?
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="tempoDeJogo"
+                        value="sim"
+                    >
+                    <span>Sim</span>
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="tempoDeJogo"
+                        value="nao"
+                    >
+                    <span>Não</span>
+                </label>
+            </div>
+                <!--GATILHOS-->
+
+            <div class="campo">
+                <label for="gatilhos">
+                    O sistema de Ordem Paranormal inclui descrições brutais e situações extremas. Todos temos limites. Use o espaço abaixo para informar qualquer conteúdo que você prefere evitar durante a sessão (ex.: violência intensa, terror psicológico, temas sensíveis).
+                </label>
+                <input
+                    type="text"
+                    name="gatilhos"
+                    id="gatilhos"
+                    placeholder="Lista de Gatilhos(Não obrigatório)"
+                    >
+            </input>
+            </div>
+
+            <div class="proximo-container">
+
+                <button
+                    id="botaoQuestionario2"
+                    class="botao"
+                >
+                    CONTINUAR
+                </button>
+
+            </div>
+        </section>
+
+        <!-- =====================================
+             QUESTIONÁRIO — TELA 3
+        ====================================== -->
+        <section id="questionario03" class="questionario">
+
+            <!--@INSTAGRAM-->
+
+            <div class="campo">
+                <label for="instagram">
+                    Esta campanha será uma One-Shot, e a construção de fichas precisa ser feita previamente. Coloque seu @ do Instagram para entrar no grupo da sessão e receber instruções sobre a ficha e informações adicionais.
+                </label>
+                <input
+                    type="text"
+                    name="instagram"
+                    id="instagram"
+                    placeholder="Digite seu @ do instagram"
+                >
+            </div>
+            <div class="campo">
+                <label for="campanhaTeste">
+                    Ordem Paranormal está passando por uma reformulação em seu sistema de regras. Você gostaria de jogar a missão teste “A Maldição do Ídolo de Pedra: Ato I” e contribuir para os desenvolvedores?
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="campanhaTeste"
+                        value="sim"
+                    >
+                    <span>Sim</span>
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="campanhaTeste"
+                        value="nao"
+                    >
+                    <span>Não</span>
+                </label>
+            </div>
+
+            <div class="proximo-container">
+
+                <button
+                    id="botaoQuestionario3"
+                    class="botao"
+                >
+                    FINALIZAR
+                </button>
+
+            </div>
+        </section>
+
+        <!-- Tela Final -->
+
+        <section id="telaFinal" class="tela-final">
+
+            <div class="simbolo-final">
+                <img src="img/simbolo.png" alt="Símbolo da Ordem">
+            </div>
+
+            <div class="decisao">
+                <h2>Você aceita seu novo Começo?</h2>
+
+                <div class="botoes-decisao">
+                    <button id="botaoSim" class="botao">
+                        SIM
+                    </button>
+
+                    <button id="botaoNao" class="botao">
+                        NÃO
+                    </button>
+                </div>
+
+                <button id="botaoFinal" class="botao botao-final">
+                    Os que tocam o outro lado, não podem retornar para a realidade.
+                </button>
+            </div>
+        </section>
+        <section id="mensagemInicio" class="mensagem-inicio">
+            <p>
+                Seu novo começo acontecerá em 24 de outubro às 8:00 da manhã. Esteja pronto.
+            </p>
+        </section>
+
+        <section id="avisoFas" class="aviso-fas">
+
+            <p>
+                <span>Aviso sobre Licença da Comunidade — Ordem Paranormal</span><br>
+
+Este evento e a inscrição para participação nesta mesa de RPG são totalmente gratuitos e seguem as diretrizes estabelecidas pela Licença da Comunidade de Ordem Paranormal.<br>
+
+A atividade é uma produção independente e não possui qualquer vínculo oficial, parceria, aprovação, supervisão ou endosso dos detentores dos direitos autorais de Ordem Paranormal.<br>
+
+Todo o conteúdo desenvolvido para esta mesa respeitará as diretrizes da licença, não incluindo materiais preconceituosos, discriminatórios, ofensivos ou prejudiciais a pessoas ou grupos reais, bem como qualquer tipo de sexualização envolvendo personagens menores de idade no cânone.<br>
+
+Também não será utilizado o nome, imagem ou voz de pessoas reais de maneira difamatória ou que viole direitos de personalidade, tampouco serão atribuídas a indivíduos reais falas, ações ou posicionamentos que não tenham sido praticados por eles.<br>
+O evento não utilizará conteúdos protegidos por terceiros sem a devida autorização.<br>
+
+Por se tratar de uma iniciativa gratuita e independente, qualquer eventual utilização de material gerado por inteligência artificial será devidamente identificada conforme as exigências previstas pela Licença da Comunidade.<br>
+
+Esta mesa utiliza elementos do universo de Ordem Paranormal exclusivamente dentro dos limites e permissões estabelecidos pela respectiva Licença da Comunidade, respeitando integralmente suas diretrizes e restrições.<br>
+
+Esta é uma iniciativa independente, gratuita e criada por fãs.
+            </p>
+        </section>
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

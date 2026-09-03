@@ -1,0 +1,644 @@
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #050505;
+    color: #c00000;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   TELA INICIAL
+========================================= */
+
+.tela-inicial {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #050505;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+
+}
+
+/* =========================================
+   SÍMBOLO DA TELA INICIAL
+========================================= */
+
+.simbolo-entrada {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition:
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.8s ease;
+}
+
+
+.simbolo-entrada img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+/* =========================================
+   ANIMAÇÃO DA SAÍDA
+========================================= */
+
+.tela-inicial.saindo {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/*
+   Quando clicado, o símbolo diminui.
+*/
+
+.simbolo-entrada.reduzindo {
+    transform: scale(0.25) translateY(-150vh);
+    opacity: 0;
+
+}
+
+
+/* =========================================
+   CONTEÚDO PRINCIPAL
+========================================= */
+
+.pagina {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 30px 30px 100px;
+
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+
+}
+
+
+/*
+   Conteúdo aparece depois do clique.
+*/
+
+.pagina.visivel {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+
+/* =========================================
+   SÍMBOLO NO TOPO
+========================================= */
+
+.simbolo-topo {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #500000;
+
+}
+
+
+.simbolo-topo img {
+
+    width: 180px;
+    height: auto;
+    display: block;
+
+}
+
+
+/* =========================================
+   INTRODUÇÃO
+========================================= */
+
+.introducao {
+
+    border-bottom: 1px solid #500000;
+    padding: 35px 10px;
+    margin-bottom: 50px;
+
+}
+
+
+.introducao h1 {
+
+    font-size: 2.3rem;
+    margin-bottom: 25px;
+    font-weight: normal;
+    letter-spacing: 2px;
+
+}
+
+
+.introducao p {
+
+    font-size: 24px;
+    line-height: 1.8;
+    margin-bottom: 18px;
+
+}
+
+
+.introducao p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* =========================================
+   TERMO
+========================================= */
+
+.termo {
+
+    padding: 0 10px;
+
+}
+.titulo-questionario {
+    display: none;
+    color: #c00000;
+}
+
+.titulo-questionario.visivel {
+    display: block;
+}
+
+.titulo-questionario h2 {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.termo p {
+    font-size: 24px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+
+.termo strong {
+
+    color: #e00000;
+
+}
+
+
+/* =========================================
+   LISTA
+========================================= */
+
+.termo ul {
+
+    margin: 0 0 25px 25px;
+
+    line-height: 1.8;
+
+}
+
+
+.termo li {
+
+    font-size: 24px;
+    padding-left: 8px;
+    margin-bottom: 6px;
+
+}
+
+
+/* =========================================
+   CONSENTIMENTO
+========================================= */
+
+.consentimento {
+
+    border-top: 1px solid #500000;
+
+    margin-top: 40px;
+
+    padding-top: 30px;
+
+}
+
+
+.checkbox-container {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    cursor: pointer;
+
+}
+
+
+.checkbox-container input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+/* Checkbox */
+
+.checkmark {
+
+    width: 24px;
+
+    height: 24px;
+
+    min-width: 24px;
+
+    border: 2px solid #8b0000;
+
+    display: inline-block;
+
+    position: relative;
+
+    transition: 0.2s ease;
+
+}
+
+
+/* Checkbox marcado */
+
+.checkbox-container input:checked + .checkmark {
+
+    background-color: #b00000;
+
+    border-color: #e00000;
+
+}
+
+
+.checkbox-container input:checked + .checkmark::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+
+    height: 12px;
+
+    border: solid #050505;
+
+    border-width: 0 2px 2px 0;
+
+    transform: rotate(45deg);
+
+    left: 7px;
+
+    top: 3px;
+
+}
+
+
+/* Texto */
+
+.texto-checkbox {
+
+    font-size: 0.95rem;
+
+    line-height: 1.6;
+
+}
+/* =========================================
+   BOTÃO
+========================================= */
+.proximo-container {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+
+}
+
+
+.botao {
+    background-color: #8b0000;
+    color: #050505;
+    border: 1px solid #c00000;
+    padding: 15px 50px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+
+.botao:disabled {
+    background-color: #250000;
+    color: #5c2222;
+    border-color: #350000;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.botao:not(:disabled):hover {
+    background-color: #c00000;
+    color: #000000;
+    box-shadow:
+        0 0 10px rgba(192, 0, 0, 0.4),
+        0 0 25px rgba(192, 0, 0, 0.15);
+}
+/* =========================================
+   CELULAR
+========================================= */
+@media (max-width: 600px) {
+
+    .simbolo-entrada {
+
+        width: 95vw;
+        height: 90vh;
+    }
+
+
+    .pagina {
+        padding: 25px 20px 70px;
+    }
+
+
+    .simbolo-topo img {
+        width: 130px;
+    }
+
+    .introducao h1 {
+        font-size: 1.8rem;
+    }
+    .introducao p,
+    .termo p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .texto-checkbox {
+        font-size: 0.9rem;
+    }
+
+
+    .botao {
+        width: 100%;
+        padding: 15px;
+
+    }
+
+}
+/* Questionário — Tela 1 */
+
+.questionario {
+    color: #c00000;
+}
+
+.campo {
+    margin-bottom: 35px;
+}
+
+.campo label {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+
+/* Campos de texto */
+
+.campo input[type="text"],
+.campo input[type="number"] {
+    width: 100%;
+    padding: 10px 5px;
+    background: #050505;
+    color: #c00000;
+    border: none;
+    border-bottom: 2px solid #c00000;
+    outline: none;
+    font-size: 24px;
+    font-family: inherit;
+}
+
+.campo input::placeholder {
+    color: #6b0000;
+}
+
+/* Alternativas */
+
+.opcoes-experiencia {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.opcoes-experiencia label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #050505;
+    border: 1px solid #c00000;
+    cursor: pointer;
+}
+
+.opcoes-experiencia label span {
+    font-size: 24px;
+}
+
+.aviso-fas span {
+    font-size: 40px;
+}
+.aviso-fas {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+    opacity: 0;
+}
+
+.aviso-fas.visivel {
+    display: block;
+    animation: aparecer 1s ease forwards;
+}
+
+.aviso-fas p {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+.opcoes-experiencia input {
+    accent-color: #c00000;
+}
+
+.questionario {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    display: none;
+}
+
+.questionario.visivel {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.introducao.saindo,
+.termo.saindo {
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+}
+/* Tela Final */
+.tela-final {
+    text-align: center;
+    opacity: 0;
+    display: none;
+}
+
+.tela-final.visivel {
+    display: block;
+    animation: entrarFinal 1s ease forwards;
+}
+
+.simbolo-final img {
+    width: 300px;
+    max-width: 70vw;
+    transition: width 1.5s ease;
+}
+
+.tela-final.visivel .simbolo-final img {
+    width: 500px;
+}
+
+.botoes-decisao {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.botao-final {
+    display: none;
+    margin: 0 auto;
+}
+
+@keyframes entrarFinal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mensagem de início e aviso */
+
+.mensagem-inicio,
+.aviso-fas {
+    display: none;
+    text-align: center;
+}
+
+.mensagem-inicio.visivel,
+.aviso-fas.visivel {
+    display: block;
+    animation: aparecer 1s ease forwards;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+.mensagem-inicio {
+    display: none;
+    text-align: center;
+    opacity: 0;
+}
+
+.mensagem-inicio.visivel {
+    display: block;
+    animation: aparecer 1s ease forwards;
+}
+
+.mensagem-inicio.saindo {
+    animation: desaparecer 1s ease forwards;
+}
+@keyframes desaparecer {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
