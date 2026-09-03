@@ -163,6 +163,10 @@ botaoQuestionario1.addEventListener("click", function () {
     setTimeout(function () {
         questionario1.style.display = "none";
         questionario2.style.display = "block";
+        window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+        });
 
         setTimeout(function () {
             questionario2.classList.add("visivel");
@@ -196,7 +200,10 @@ botaoQuestionario2.addEventListener("click", function () {
     setTimeout(function () {
         questionario2.style.display = "none";
         questionario3.style.display = "block";
-        
+        window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+        });
         setTimeout(function () {
             questionario3.classList.add("visivel");
         }, 50);
@@ -235,8 +242,11 @@ botaoQuestionario3.addEventListener("click", function () {
         questionario3.style.display = "none";
 
         tituloQuestionario.classList.remove("visivel");
-         simboloTopo.style.display = "none";
-
+        simboloTopo.style.display = "none";
+        window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+        });
         musica.pause();
         musica.currentTime = 0;
 
