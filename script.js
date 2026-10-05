@@ -4,6 +4,53 @@ const musica = document.getElementById("musica");
 musica.volume = 0.4;
 const musicaFinal = document.getElementById("musicaFinal");
 musicaFinal.volume = 0.4;
+
+const botaoMusica = document.getElementById("botaoMusica");
+const iconeMusica = document.getElementById("iconeMusica");
+let musicaBloqueada = false;
+
+function atualizarIconeMusica() {
+    if (musicaBloqueada) {
+        iconeMusica.src = "img/musica-bloqueada.png";
+        iconeMusica.alt = "Música bloqueada";
+        botaoMusica.setAttribute("aria-label", "Ligar música");
+        botaoMusica.setAttribute("title", "Ligar música");
+    } else {
+        iconeMusica.src = "img/musica-ligada.png";
+        iconeMusica.alt = "Música ligada";
+        botaoMusica.setAttribute("aria-label", "Desligar música");
+        botaoMusica.setAttribute("title", "Desligar música");
+    }
+}
+
+function tocarMusicaAtual() {
+    if (musicaBloqueada) {
+        return;
+    }
+
+    const musicaFinalAtiva = telaFinal && telaFinal.style.display === "block";
+
+    const audioAtual = musicaFinalAtiva ? musicaFinal : musica;
+
+    audioAtual.play().catch(function (erro) {
+        console.log("Não foi possível iniciar a música:", erro);
+    });
+}
+
+botaoMusica.addEventListener("click", function () {
+    musicaBloqueada = !musicaBloqueada;
+
+    if (musicaBloqueada) {
+        musica.pause();
+        musicaFinal.pause();
+    } else {
+        tocarMusicaAtual();
+    }
+
+    atualizarIconeMusica();
+});
+
+atualizarIconeMusica();
 const conteudo = document.getElementById("conteudo");
 const checkbox = document.getElementById("consentimento");
 const botao = document.getElementById("botaoProsseguir");
@@ -43,9 +90,11 @@ simboloEntrada.addEventListener("click", function () {
 
     musica.currentTime = 3.5;
     // Inicia a música
-    musica.play().catch(function (erro) {
-        console.log("Não foi possível iniciar a música:", erro);
-    });
+    if (!musicaBloqueada) {
+        musica.play().catch(function (erro) {
+            console.log("Não foi possível iniciar a música:", erro);
+        });
+    }
 
     // Começa a animação do símbolo
     simboloEntrada.classList.add("reduzindo");
@@ -246,9 +295,11 @@ botaoQuestionario3.addEventListener("click", function () {
     musica.pause();
     musica.currentTime = 0;
 
-    musicaFinal.play().catch(function (erro) {
-        console.log("Não foi possível iniciar a música final:", erro);
-    });
+    if (!musicaBloqueada) {
+        musicaFinal.play().catch(function (erro) {
+            console.log("Não foi possível iniciar a música final:", erro);
+        });
+    }
 
     telaFinal.style.display = "block";
 
