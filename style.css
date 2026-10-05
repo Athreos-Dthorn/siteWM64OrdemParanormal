@@ -653,3 +653,37 @@ body {
 input[type="radio"] {
     accent-color: #c00000;
 }
+
+
+/* =========================================
+   CONTROLE DA MÚSICA
+========================================= */
+.botao-musica {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+.botao-musica img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.botao-musica:hover { transform: scale(1.08); }
+.botao-musica:active { transform: scale(0.95); }
+@media (max-width: 600px) {
+    .botao-musica { top: 12px; right: 12px; width: 48px; height: 48px; }
+}
