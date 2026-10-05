@@ -1,361 +1,705 @@
-const telaInicial = document.getElementById("telaInicial");
-const simboloEntrada = document.getElementById("simboloEntrada");
-const musica = document.getElementById("musica");
-musica.volume = 0.4;
-const musicaFinal = document.getElementById("musicaFinal");
-musicaFinal.volume = 0.4;
-
-const botaoMusica = document.getElementById("botaoMusica");
-const iconeMusica = document.getElementById("iconeMusica");
-let musicaBloqueada = false;
-
-function atualizarIconeMusica() {
-    if (musicaBloqueada) {
-        iconeMusica.src = "img/musica-bloqueada.png";
-        iconeMusica.alt = "Música bloqueada";
-        botaoMusica.setAttribute("aria-label", "Ligar música");
-        botaoMusica.setAttribute("title", "Ligar música");
-    } else {
-        iconeMusica.src = "img/musica-ligada.png";
-        iconeMusica.alt = "Música ligada";
-        botaoMusica.setAttribute("aria-label", "Desligar música");
-        botaoMusica.setAttribute("title", "Desligar música");
-    }
-}
-
-function tocarMusicaAtual() {
-    if (musicaBloqueada) {
-        return;
-    }
-
-    const musicaFinalAtiva = telaFinal && telaFinal.style.display === "block";
-
-    const audioAtual = musicaFinalAtiva ? musicaFinal : musica;
-
-    audioAtual.play().catch(function (erro) {
-        console.log("Não foi possível iniciar a música:", erro);
-    });
-}
-
-botaoMusica.addEventListener("click", function () {
-    musicaBloqueada = !musicaBloqueada;
-
-    if (musicaBloqueada) {
-        musica.pause();
-        musicaFinal.pause();
-    } else {
-        tocarMusicaAtual();
-    }
-
-    atualizarIconeMusica();
-});
-
-atualizarIconeMusica();
-const conteudo = document.getElementById("conteudo");
-const checkbox = document.getElementById("consentimento");
-const botao = document.getElementById("botaoProsseguir");
-const questionario1 = document.getElementById("questionario1");
-const questionario2 = document.getElementById("questionario02");
-const botaoQuestionario1 = document.getElementById("botaoQuestionario1");
-const botaoQuestionario2 = document.getElementById("botaoQuestionario2");
-const questionario3 = document.getElementById("questionario03");
-const botaoQuestionario3 = document.getElementById("botaoQuestionario3")
-const botaoSim = document.getElementById("botaoSim");
-const botaoNao = document.getElementById("botaoNao");
-const botaoFinal = document.getElementById("botaoFinal");
-const mensagemInicio = document.getElementById("mensagemInicio");
-const avisoFas = document.getElementById("avisoFas");
-const simboloTopo = document.querySelector(".simbolo-topo");
-const tituloQuestionario = document.querySelector(".titulo-questionario");
-const nomeCompleto = document.getElementById("nomeCompleto");
-const idade = document.getElementById("idade");
-const experiencias = document.querySelectorAll('input[name="experiencia"]');
-const tempoDeJogo = document.querySelectorAll('input[name="tempoDeJogo"]');
-const instagram = document.getElementById("instagram");
-const campanhaTeste = document.querySelectorAll('input[name="campanhaTeste"]');
-const respostas = {
-    nome: "",
-    idade: "",
-    experiencia: "",
-    tempoDeJogo: "",
-    gatilhos: "",
-    instagram: "",
-    campanhaTeste: ""
-};
 /* =========================================
-   ENTRADA NO SITE
+   CONFIGURAÇÕES GERAIS
 ========================================= */
 
-simboloEntrada.addEventListener("click", function () {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    musica.currentTime = 3.5;
-    // Inicia a música
-    if (!musicaBloqueada) {
-        musica.play().catch(function (erro) {
-            console.log("Não foi possível iniciar a música:", erro);
-        });
-    }
+html {
+    scroll-behavior: auto;
+}
 
-    // Começa a animação do símbolo
-    simboloEntrada.classList.add("reduzindo");
+body {
+    background-color: #050505;
+    color: #c00000;
 
-    // Depois inicia o desaparecimento da tela inicial
-    setTimeout(function () {
+    font-family: Georgia, "Times New Roman", serif;
 
-        telaInicial.classList.add("saindo");
+    min-height: 100vh;
+}
 
-        conteudo.classList.add("visivel");
 
-    }, 500);
+/* =========================================
+   TELA INICIAL
+========================================= */
 
-});
+.tela-inicial {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #050505;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+
+}
+
+/* =========================================
+   SÍMBOLO DA TELA INICIAL
+========================================= */
+
+.simbolo-entrada {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition:
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.8s ease;
+}
+
+
+.simbolo-entrada img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+/* =========================================
+   ANIMAÇÃO DA SAÍDA
+========================================= */
+
+.tela-inicial.saindo {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/*
+   Quando clicado, o símbolo diminui.
+*/
+
+.simbolo-entrada.reduzindo {
+    transform: scale(0.25) translateY(-150vh);
+    opacity: 0;
+
+}
+
+
+/* =========================================
+   CONTEÚDO PRINCIPAL
+========================================= */
+
+.pagina {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 30px 30px 100px;
+
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+
+}
+
+
+/*
+   Conteúdo aparece depois do clique.
+*/
+
+.pagina.visivel {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+
+/* =========================================
+   SÍMBOLO NO TOPO
+========================================= */
+
+.simbolo-topo {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #500000;
+
+}
+
+
+.simbolo-topo img {
+
+    width: 180px;
+    height: auto;
+    display: block;
+
+}
+
+
+/* =========================================
+   INTRODUÇÃO
+========================================= */
+
+.introducao {
+
+    border-bottom: 1px solid #500000;
+    padding: 35px 10px;
+    margin-bottom: 50px;
+
+}
+
+
+.introducao h1 {
+
+    font-size: 2.3rem;
+    margin-bottom: 25px;
+    font-weight: normal;
+    letter-spacing: 2px;
+
+}
+
+
+.introducao p {
+
+    font-size: 24px;
+    line-height: 1.8;
+    margin-bottom: 18px;
+
+}
+
+
+.introducao p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* =========================================
+   TERMO
+========================================= */
+
+.termo {
+
+    padding: 0 10px;
+
+}
+.titulo-questionario {
+    display: none;
+    color: #c00000;
+}
+
+.titulo-questionario.visivel {
+    display: block;
+}
+
+.titulo-questionario h2 {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.termo p {
+    font-size: 24px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+
+.termo strong {
+
+    color: #e00000;
+
+}
+
+
+/* =========================================
+   LISTA
+========================================= */
+
+.termo ul {
+
+    margin: 0 0 25px 25px;
+
+    line-height: 1.8;
+
+}
+
+
+.termo li {
+
+    font-size: 24px;
+    padding-left: 8px;
+    margin-bottom: 6px;
+
+}
 
 
 /* =========================================
    CONSENTIMENTO
 ========================================= */
 
-checkbox.addEventListener("change", function () {
+.consentimento {
 
-    if (checkbox.checked) {
+    border-top: 1px solid #500000;
 
-        botao.disabled = false;
+    margin-top: 40px;
 
-    } else {
+    padding-top: 30px;
 
-        botao.disabled = true;
+}
+
+
+.checkbox-container {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    cursor: pointer;
+
+}
+
+
+.checkbox-container input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+/* Checkbox */
+
+.checkmark {
+
+    width: 24px;
+
+    height: 24px;
+
+    min-width: 24px;
+
+    border: 2px solid #8b0000;
+
+    display: inline-block;
+
+    position: relative;
+
+    transition: 0.2s ease;
+
+}
+
+
+/* Checkbox marcado */
+
+.checkbox-container input:checked + .checkmark {
+
+    background-color: #b00000;
+
+    border-color: #e00000;
+
+}
+
+
+.checkbox-container input:checked + .checkmark::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+
+    height: 12px;
+
+    border: solid #050505;
+
+    border-width: 0 2px 2px 0;
+
+    transform: rotate(45deg);
+
+    left: 7px;
+
+    top: 3px;
+
+}
+
+
+/* Texto */
+
+.texto-checkbox {
+
+    font-size: 0.95rem;
+
+    line-height: 1.6;
+
+}
+/* =========================================
+   BOTÃO
+========================================= */
+.proximo-container {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+
+}
+
+
+.botao {
+    background-color: #8b0000;
+    color: #050505;
+    border: 1px solid #c00000;
+    padding: 15px 50px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+
+.botao:disabled {
+    background-color: #250000;
+    color: #5c2222;
+    border-color: #350000;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.botao:not(:disabled):hover {
+    background-color: #c00000;
+    color: #000000;
+    box-shadow:
+        0 0 10px rgba(192, 0, 0, 0.4),
+        0 0 25px rgba(192, 0, 0, 0.15);
+}
+/* =========================================
+   CELULAR
+========================================= */
+@media (max-width: 600px) {
+
+    .simbolo-entrada {
+
+        width: 95vw;
+        height: 90vh;
+    }
+
+
+    .pagina {
+        padding: 25px 20px 70px;
+    }
+
+
+    .simbolo-topo img {
+        width: 130px;
+    }
+
+    .introducao h1 {
+        font-size: 1.8rem;
+    }
+    .introducao p,
+    .termo p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    .texto-checkbox {
+        font-size: 0.9rem;
+    }
+
+
+    .botao {
+        width: 100%;
+        padding: 15px;
 
     }
 
-});
+}
+/* Questionário — Tela 1 */
+
+.questionario {
+    color: #c00000;
+}
+
+.campo {
+    margin-bottom: 35px;
+}
+
+.campo label {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+
+/* Campos de texto */
+
+.campo input[type="text"],
+.campo input[type="number"] {
+    width: 100%;
+    padding: 10px 5px;
+    background: #050505;
+    color: #c00000;
+    border: none;
+    border-bottom: 2px solid #c00000;
+    outline: none;
+    font-size: 24px;
+    font-family: inherit;
+}
+
+.campo input::placeholder {
+    color: #6b0000;
+}
+
+/* Alternativas */
+
+.opcoes-experiencia {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.opcoes-experiencia label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #050505;
+    border: 1px solid #c00000;
+    cursor: pointer;
+}
+
+.opcoes-experiencia label span {
+    font-size: 24px;
+}
+
+.aviso-fas span {
+    font-size: 40px;
+}
+.aviso-fas {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+    opacity: 0;
+}
+
+.aviso-fas.visivel {
+    display: block;
+    animation: aparecer 1s ease forwards;
+}
+
+.aviso-fas p {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+.opcoes-experiencia input {
+    accent-color: #c00000;
+}
+
+.questionario {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    display: none;
+}
+
+.questionario.visivel {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.introducao.saindo,
+.termo.saindo {
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+}
+/* Tela Final */
+.tela-final {
+    text-align: center;
+    opacity: 0;
+    display: none;
+}
+
+.tela-final.visivel {
+    display: block;
+    animation: entrarFinal 1s ease forwards;
+}
+
+.simbolo-final img {
+    width: 300px;
+    max-width: 70vw;
+    transition: width 1.5s ease;
+}
+
+.tela-final.visivel .simbolo-final img {
+    width: 500px;
+}
+
+.botoes-decisao {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.botao-final {
+    display: none;
+    margin: 0 auto;
+}
+
+@keyframes entrarFinal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mensagem de início e aviso */
+
+.mensagem-inicio,
+.aviso-fas {
+    display: none;
+    text-align: center;
+}
+
+.mensagem-inicio.visivel,
+.aviso-fas.visivel {
+    display: block;
+    animation: aparecer 1s ease forwards;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+.mensagem-inicio {
+    display: none;
+    text-align: center;
+    opacity: 0;
+}
+
+.mensagem-inicio.visivel {
+    display: block;
+    animation: aparecer 1s ease forwards;
+}
+
+.mensagem-inicio.saindo {
+    animation: desaparecer 1s ease forwards;
+}
+@keyframes desaparecer {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+    introducao p,
+    .termo p,
+    .termo li,
+    .campo label,
+    .campo input[type="text"],
+    .campo input[type="number"],
+    .opcoes-experiencia label span {
+        font-size: clamp(16px, 2.2vw, 24px);
+    }
+input[type="radio"] {
+    accent-color: #c00000;
+}
 
 
 /* =========================================
-   BOTÃO PROSSEGUIR
+   CONTROLE DA MÚSICA
 ========================================= */
-function enviarRespostas() {
-    const dados = new URLSearchParams();
 
-    dados.append("entry.480619261", respostas.nome);
-    dados.append("entry.1735860670", respostas.idade);
-    dados.append("entry.1454512378", respostas.experiencia);
-    dados.append("entry.1753739061", respostas.tempoDeJogo);
-    dados.append("entry.1243804396", respostas.gatilhos);
-    dados.append("entry.1129876452", respostas.instagram);
-    dados.append("entry.571834739", respostas.campanhaTeste);
+.botao-musica {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
 
-    fetch(
-        "https://docs.google.com/forms/d/e/1FAIpQLScqW-ffoz08GE7blS-W3AETn1h-1EHpAXRw9OEMQm_soX7n7w/formResponse",
-        {
-            method: "POST",
-            mode: "no-cors",
-            body: dados
-        }
-    );
+    width: 58px;
+    height: 58px;
+
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-botao.addEventListener("click", function () {
-    if (!checkbox.checked) {
-        return;
+.botao-musica img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.botao-musica:hover {
+    transform: scale(1.08);
+}
+
+.botao-musica:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    .botao-musica {
+        top: 12px;
+        right: 12px;
+        width: 48px;
+        height: 48px;
     }
-
-    const termo = document.querySelector(".termo");
-    const introducao = document.querySelector(".introducao");
-    const questionario = document.getElementById("questionario1");
-
-    // Faz o termo e a introdução desaparecer
-    introducao.classList.add("saindo");
-    termo.classList.add("saindo");
-
-    // Espera a animação terminar antes de mostrar o questionário
-    setTimeout(function () {
-        introducao.style.display = "none";
-        termo.style.display = "none";
-        tituloQuestionario.classList.add("visivel");
-        questionario.classList.add("visivel");
-    }, 600);
-});
-
-botaoQuestionario1.addEventListener("click", function () {
-    if (nomeCompleto.value.trim() === "") {
-        alert("Por favor, informe seu nome completo.");
-        return;
-    }
-
-    if (idade.value.trim() === "") {
-        alert("Por favor, informe sua idade.");
-        return;
-    }
-
-    let experienciaSelecionada = false;
-
-    experiencias.forEach(function (opcao) {
-        if (opcao.checked) {
-            experienciaSelecionada = true;
-        }
-    });
-
-    if (!experienciaSelecionada) {
-        alert("Selecione seu nível de experiência.");
-        return;
-    }
-    respostas.nome = nomeCompleto.value;
-    respostas.idade = idade.value;
-
-    experiencias.forEach(function (opcao) {
-        if (opcao.checked) {
-            respostas.experiencia = opcao.value;
-        }
-    });
-   questionario1.classList.remove("visivel");
-
-setTimeout(function () {
-    questionario1.style.display = "none";
-    questionario2.style.display = "block";
-
-    voltarAoTopo();
-
-    setTimeout(function () {
-        questionario2.classList.add("visivel");
-        voltarAoTopo();
-    }, 50);
-
-}, 600);
-});
-
-botaoQuestionario2.addEventListener("click", function () {
-     let tempoSelecionado = false;
-
-    tempoDeJogo.forEach(function (opcao) {
-        if (opcao.checked) {
-            tempoSelecionado = true;
-        }
-    });
-
-    if (!tempoSelecionado) {
-        alert("Informe se você poderá participar durante todo o evento.");
-        return;
-    }
-    tempoDeJogo.forEach(function (opcao) {
-    if (opcao.checked) {
-        respostas.tempoDeJogo = opcao.value;
-    }
-    });
-
-    respostas.gatilhos = document.getElementById("gatilhos").value;
-    questionario2.classList.remove("visivel");
-
-    setTimeout(function () {
-    questionario2.style.display = "none";
-    questionario3.style.display = "block";
-
-    voltarAoTopo();
-
-    setTimeout(function () {
-        questionario3.classList.add("visivel");
-        voltarAoTopo();
-    }, 50);
-
-}, 600);
-});
-
-botaoQuestionario3.addEventListener("click", function () {
-     if (instagram.value.trim() === "") {
-        alert("Informe seu Instagram.");
-        return;
-    }
-
-    let campanhaSelecionada = false;
-
-    campanhaTeste.forEach(function (opcao) {
-        if (opcao.checked) {
-            campanhaSelecionada = true;
-        }
-    });
-
-    if (!campanhaSelecionada) {
-        alert("Informe se deseja participar da missão teste.");
-        return;
-    }
-    respostas.instagram = instagram.value;
-
-    campanhaTeste.forEach(function (opcao) {
-        if (opcao.checked) {
-            respostas.campanhaTeste = opcao.value;
-        }
-    });
-    questionario3.classList.remove("visivel");
-
-    setTimeout(function () {
-    questionario3.style.display = "none";
-
-    tituloQuestionario.classList.remove("visivel");
-    simboloTopo.style.display = "none";
-
-    musica.pause();
-    musica.currentTime = 0;
-
-    if (!musicaBloqueada) {
-        musicaFinal.play().catch(function (erro) {
-            console.log("Não foi possível iniciar a música final:", erro);
-        });
-    }
-
-    telaFinal.style.display = "block";
-
-    voltarAoTopo();
-
-    setTimeout(function () {
-        telaFinal.classList.add("visivel");
-        voltarAoTopo();
-    }, 50);
-
-}, 600);
-});
-
-botaoNao.addEventListener("click", function () {
-
-    // Esconde os botões SIM e NÃO
-    botaoSim.style.display = "none";
-    botaoNao.style.display = "none";
-
-    // Mostra o botão final
-    botaoFinal.style.display = "block";
-});
-
-botaoSim.addEventListener("click", function () {
-    enviarRespostas();
-    telaFinal.style.display = "none";
-    mensagemInicio.classList.add("visivel");
-    setTimeout(function () {
-        mensagemInicio.classList.add("saindo");
-
-        setTimeout(function () {
-            mensagemInicio.style.display = "none";
-            avisoFas.classList.add("visivel");
-        }, 1000);
-
-    }, 4000);
-});
-
-botaoFinal.addEventListener("click", function () {
-    enviarRespostas();
-    telaFinal.style.display = "none";
-
-    mensagemInicio.classList.add("visivel");
-
-    setTimeout(function () {
-        mensagemInicio.classList.add("saindo");
-
-        setTimeout(function () {
-            mensagemInicio.style.display = "none";
-            avisoFas.classList.add("visivel");
-        }, 1000);
-
-    }, 4000);
-});
-function voltarAoTopo() {
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    window.scrollTo(0, 0);
 }
